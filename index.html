@@ -112,27 +112,51 @@
         border: 1.5px solid #334155 !important;
         min-height: 0 !important;
         height: 100% !important;
-        padding: 2px 3px !important;
+        padding: 2px 2px !important;
         background-color: #ffffff !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: space-between !important;
+        justify-content: flex-start !important;
         overflow: hidden !important;
+        box-sizing: border-box !important;
+      }
+      .seat-header-row {
+        height: 14px !important;
+        min-height: 14px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 1px !important;
+        padding: 0 1px !important;
+      }
+      .seat-content-box {
+        flex: 1 1 0% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        margin: auto 0 !important;
+        overflow: visible !important;
       }
       .student-id-txt {
-        font-size: clamp(10px, 1.3vw, 13px) !important;
+        font-size: clamp(9px, 1.1vw, 12px) !important;
         font-weight: 800 !important;
         color: #312e81 !important;
-        margin-bottom: 1px !important;
-        line-height: 1.1 !important;
-      }
-      .student-name-txt {
-        font-size: clamp(14px, 2.1vw, 21px) !important;
-        font-weight: 900 !important;
-        color: #000000 !important;
-        letter-spacing: 0.3px !important;
+        margin-bottom: 0px !important;
         line-height: 1.1 !important;
         white-space: nowrap !important;
+      }
+      .student-name-txt {
+        font-size: clamp(12px, 1.8vw, 18px) !important;
+        font-weight: 900 !important;
+        color: #000000 !important;
+        letter-spacing: -0.3px !important;
+        line-height: 1.15 !important;
+        white-space: nowrap !important;
+        display: block !important;
+        overflow: visible !important;
       }
     }
     .seat-card {
@@ -599,7 +623,7 @@
             const hasStudentId = Boolean(seat.studentId && seat.studentId.trim());
             const hasStudent = hasName || hasStudentId;
 
-            card.className = `seat-card relative rounded-xl border-2 p-1.5 sm:p-2.5 flex flex-col justify-between items-center cursor-pointer select-none min-h-[76px] sm:min-h-[86px] lg:min-h-[92px] transition-all ${
+            card.className = `seat-card relative rounded-xl border-2 p-1 sm:p-1.5 flex flex-col justify-start items-center cursor-pointer select-none min-h-[72px] sm:min-h-[82px] lg:min-h-[88px] transition-all overflow-hidden ${
               isSelected 
                 ? 'ring-2 ring-indigo-500 bg-indigo-50 border-indigo-400 scale-[1.02] shadow-md z-10' 
                 : hasStudent
@@ -608,17 +632,17 @@
             }`;
 
             card.innerHTML = `
-              <div class="w-full flex justify-between items-center text-[9px] sm:text-[10px] text-slate-400 font-mono leading-none">
-                <span>${seat.row}-${seat.col}</span>
-                <span class="w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-slate-100 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-slate-500">${seat.id}</span>
+              <div class="seat-header-row w-full flex justify-between items-center text-[9px] sm:text-[10px] text-slate-400 font-mono leading-none mb-0.5">
+                <span class="text-[8px] sm:text-[9px] font-medium">${seat.row}-${seat.col}</span>
+                <span class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-slate-100 flex items-center justify-center text-[8px] sm:text-[9px] font-bold text-slate-500">${seat.id}</span>
               </div>
               
-              <div class="my-auto flex flex-col items-center justify-center w-full px-0.5 leading-tight text-center py-1">
+              <div class="seat-content-box flex-1 flex flex-col items-center justify-center w-full px-0.5 text-center leading-tight my-auto overflow-visible">
                 ${hasStudentId 
-                  ? `<span class="student-id-txt text-[11px] sm:text-xs lg:text-sm font-extrabold text-indigo-700 truncate w-full tracking-tight mb-0.5">${seat.studentId}</span>`
+                  ? `<span class="student-id-txt text-[10px] sm:text-xs font-extrabold text-indigo-700 w-full tracking-tight leading-none mb-0.5 whitespace-nowrap">${seat.studentId}</span>`
                   : ''
                 }
-                <span class="student-name-txt font-black text-sm sm:text-base lg:text-lg truncate w-full tracking-tight ${hasName ? 'text-slate-900' : 'text-slate-300 font-normal'}">
+                <span class="student-name-txt font-black text-xs sm:text-sm lg:text-base w-full tracking-tight break-keep leading-tight whitespace-nowrap ${hasName ? 'text-slate-900' : 'text-slate-300 font-normal'}">
                   ${hasName ? seat.name : (hasStudentId ? '' : '빈자리')}
                 </span>
               </div>
@@ -1186,26 +1210,50 @@
               border: 1.5px solid #334155 !important;
               min-height: 0 !important;
               height: 100% !important;
-              padding: 2px 3px !important;
+              padding: 2px 2px !important;
               display: flex !important;
               flex-direction: column !important;
-              justify-content: space-between !important;
+              justify-content: flex-start !important;
               overflow: hidden !important;
+              box-sizing: border-box !important;
+            }
+            .seat-header-row {
+              height: 14px !important;
+              min-height: 14px !important;
+              display: flex !important;
+              justify-content: space-between !important;
+              align-items: center !important;
+              margin-bottom: 1px !important;
+              padding: 0 1px !important;
+            }
+            .seat-content-box {
+              flex: 1 1 0% !important;
+              display: flex !important;
+              flex-direction: column !important;
+              justify-content: center !important;
+              align-items: center !important;
+              min-height: 0 !important;
+              padding: 0 !important;
+              margin: auto 0 !important;
+              overflow: visible !important;
             }
             .student-id-txt {
-              font-size: clamp(10px, 1.3vw, 13px) !important;
+              font-size: clamp(9px, 1.1vw, 12px) !important;
               font-weight: 800 !important;
               color: #312e81 !important;
-              margin-bottom: 1px !important;
-              line-height: 1.1 !important;
-            }
-            .student-name-txt {
-              font-size: clamp(14px, 2.1vw, 21px) !important;
-              font-weight: 900 !important;
-              color: #000000 !important;
-              letter-spacing: 0.3px !important;
+              margin-bottom: 0px !important;
               line-height: 1.1 !important;
               white-space: nowrap !important;
+            }
+            .student-name-txt {
+              font-size: clamp(12px, 1.8vw, 18px) !important;
+              font-weight: 900 !important;
+              color: #000000 !important;
+              letter-spacing: -0.3px !important;
+              line-height: 1.15 !important;
+              white-space: nowrap !important;
+              display: block !important;
+              overflow: visible !important;
             }
           </style>
         </head>
