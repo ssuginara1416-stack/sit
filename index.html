@@ -304,36 +304,36 @@
 
     <script>
         const defaultStudents = [
-            { id: "10101", name: "강해린", note: "반장" },
+            { id: "10101", name: "이영지", note: "반장" },
             { id: "10102", name: "고윤정", note: "부반장" },
-            { id: "10103", name: "김채원", note: "" },
+            { id: "10103", name: "제니", note: "" },
             { id: "10104", name: "김태형", note: "" },
             { id: "10105", name: "김혜윤", note: "" },
             { id: "10106", name: "노윤서", note: "" },
-            { id: "10107", name: "민지", note: "도서" },
-            { id: "10108", name: "박보검", note: "" },
+            { id: "10107", name: "화사", note: "도서" },
+            { id: "10108", name: "임영울", note: "" },
             { id: "10109", name: "변우석", note: "" },
-            { id: "10110", name: "성한빈", note: "" },
-            { id: "10111", name: "송건희", note: "" },
+            { id: "10110", name: "카리나", note: "" },
+            { id: "10111", name: "지드래곤", note: "" },
             { id: "10112", name: "신유", note: "" },
             { id: "10113", name: "안유진", note: "" },
-            { id: "10114", name: "에스쿱스", note: "" },
-            { id: "10115", name: "원빈", note: "" },
+            { id: "10114", name: "필릭스", note: "" },
+            { id: "10115", name: "장원영", note: "" },
             { id: "10116", name: "윈터", note: "" },
-            { id: "10117", name: "Lǐ Zhīēn", note: "이지은" },
-            { id: "10118", name: "Lǐ Zhōngshuò", note: "이종석" },
-            { id: "10119", name: "Mǎ Dōngshí", note: "마동석" },
-            { id: "10120", name: "Piáo Bǎojiàn", note: "박보검" },
-            { id: "10121", name: "Piáo Xù̀iùn", note: "박서준" },
-            { id: "10122", name: "Quán Zhīxián", note: "전지현" },
-            { id: "10123", name: "Sòng Huìqiáo", note: "송혜교" },
-            { id: "10124", name: "Sòng Zhòngjī", note: "송중기" },
-            { id: "10125", name: "Xuán Bīn", note: "현빈" },
-            { id: "10126", name: "Yǐn Yínhuì", note: "윤은혜" },
-            { id: "10127", name: "Yóu Zàishí", note: "유재석" },
-            { id: "10128", name: "Zhāng Gēnxiī", note: "장근석" },
-            { id: "10129", name: "Zhèng Rónghé", note: "정용화" },
-            { id: "10130", name: "Zhèng Yǔshèng", note: "정우성" }
+            { id: "10117", name: "정국", note: "" },
+            { id: "10118", name: "이종석", note: "" },
+            { id: "10119", name: "마동석", note: "" },
+            { id: "10120", name: "박보검", note: "" },
+            { id: "10121", name: "박서준", note: "" },
+            { id: "10122", name: "전지현", note: "" },
+            { id: "10123", name: "송혜교", note: "" },
+            { id: "10124", name: "송중기", note: "" },
+            { id: "10125", name: "현빈", note: "" },
+            { id: "10126", name: "윤은혜", note: "" },
+            { id: "10127", name: "유재석", note: "" },
+            { id: "10128", name: "장근석", note: "" },
+            { id: "10129", name: "정용화", note: "" },
+            { id: "10130", name: "정우성", note: "" }
         ];
 
         let appState = {
@@ -352,9 +352,12 @@
 
         function initApp() {
             try {
-                const saved = localStorage.getItem('smart_seating_state_v19');
+                const saved = localStorage.getItem('smart_seating_state_v20');
                 if (saved) {
                     try { appState = JSON.parse(saved); } catch(e) {}
+                } else {
+                    // 최초 접속이거나 버전 업데이트 시 최신 기본 명단 강제 적용
+                    appState.students = [...defaultStudents];
                 }
                 updateSlotCountBadge();
                 renderSeating();
@@ -365,7 +368,7 @@
 
         function saveCurrentState() {
             try {
-                localStorage.setItem('smart_seating_state_v19', JSON.stringify(appState));
+                localStorage.setItem('smart_seating_state_v20', JSON.stringify(appState));
                 updateSlotCountBadge();
             } catch (err) {
                 console.error("Save error:", err);
@@ -429,7 +432,7 @@
                     appState.groups = 4;
                     appState.cols = 2;
                     appState.rows = 4;
-                    appState.titleText = '스마트 교실 좌석 배치표'; // 초기화 버튼 클릭 시 주제어 원복
+                    appState.titleText = '스마트 교실 좌석 배치표';
                     selectedSeatIndex = null;
                     saveCurrentState();
                     renderSeating();
